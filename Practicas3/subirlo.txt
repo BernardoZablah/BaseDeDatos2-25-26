@@ -1,0 +1,49 @@
+Levantar la Infraestructura,
+Para iniciar todos los servicios en segundo plano (modo detached), abre la terminal en la misma carpeta donde guardaste el docker-compose.yml y ejecuta:
+
+Bash
+docker compose up -d
+Verificar el estado de los contenedores:
+Para comprobar que todos los servicios (mongodb, mongo_express, neo4j, mongosh) se están ejecutando correctamente:
+
+Bash
+docker compose ps
+Acceso a MongoDB,
+Dispones de tres métodos para interactuar con MongoDB:
+
+Método A: Consola Directa (Recomendado)
+Conéctate directamente al shell de MongoDB (mongosh) dentro del contenedor principal usando las credenciales que definiste:
+
+Bash
+docker exec -it mongodb mongosh -u admin -p admin123
+Método B: Contenedor Cliente Dedicado
+Dado que configuraste el servicio mongosh con stdin_open y tty, puedes acoplarte directamente a él:
+
+Bash
+docker attach mongosh
+Método C: Interfaz Gráfica (Mongo Express)
+Accede visualmente desde tu navegador:
+
+URL: http://localhost:8081/
+
+Usuario: profesor
+
+Contraseña: profesor123
+
+Acceso a Neo4j,
+Método A: Interfaz Web (Neo4j Browser)
+La herramienta principal para visualizar tu modelo de grafos:
+
+URL: http://localhost:7474/
+
+Connect URL: neo4j://localhost:7687
+
+Usuario: neo4j
+
+Contraseña: password123
+
+Método B: Línea de Comandos (Cypher Shell)
+Para ejecutar consultas directamente en la terminal del contenedor:
+
+Bash
+docker exec -it neo4j cypher-shell -u neo4j -p password123
